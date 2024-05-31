@@ -206,12 +206,11 @@
         <button id="audio-control" onclick="toggleAudio()">
             <i class="fas fa-play"></i>
         </button>
+        <!-- Audio Control End -->
 
         <button id="toggleAutoScrollButton"
             style="position: fixed; bottom: 80px; left: 10px; z-index: 1000;"><i
                 class="fas fa-scroll"></i></button>
-
-        <!-- Audio Control End -->
 
         <!-- Hello! Start -->
         <div class="container-fluid position-relative py-5" id="weddingAbout">
@@ -1086,18 +1085,18 @@
 
         <script>
             document.addEventListener('DOMContentLoaded', function() {
-            // Mencegah pengguliran saat halaman dimuat
+            // Prevent scrolling when the page loads
             document.body.style.overflow = 'hidden';
 
             var scrollInterval;
             var isAutoScrollEnabled = false;
 
-            // Fungsi untuk memulai auto-scroll
+            // Function to start auto-scrolling
             function startAutoScroll() {
                 if (isAutoScrollEnabled) {
                     scrollInterval = setInterval(function() {
-                        window.scrollBy(0, 5);
-                        // Hentikan pengguliran setelah mencapai bagian bawah halaman
+                        window.scrollBy(0, 1);
+                        // Stop scrolling after reaching the bottom of the page
                         if ((window.innerHeight + window.scrollY) >= document.body.offsetHeight) {
                             clearInterval(scrollInterval);
                         }
@@ -1105,21 +1104,21 @@
                 }
             }
 
-            // Fungsi untuk menangani klik tombol undangan
+            // Function to handle invitation button click
             document.getElementById('openInvitationButton').addEventListener('click', function() {
-                // Tambahkan kelas animasi fly-out
+                // Add the fly-out animation class
                 var myLayer = document.getElementById('myLayer');
                 myLayer.classList.add('fly-out');
 
-                // Pulihkan pengguliran setelah animasi selesai
+                // Restore scrolling after the animation completes
                 setTimeout(function() {
                     myLayer.style.display = 'none';
                     document.body.style.overflow = 'auto';
                     startAutoScroll();
-                }, 1000); // Ini harus sesuai dengan durasi animasi
+                }, 1000); // This should match the duration of the animation
             });
 
-            // Fungsi untuk toggle auto-scroll
+            // Function to toggle auto-scroll
             document.getElementById('toggleAutoScrollButton').addEventListener('click', function() {
                 isAutoScrollEnabled = !isAutoScrollEnabled;
                 if (isAutoScrollEnabled) {
@@ -1129,33 +1128,6 @@
                     clearInterval(scrollInterval);
                     document.getElementById('toggleAutoScrollButton').classList.remove('auto-scroll-active');
                 }
-            });
-
-            // Memastikan tombol berfungsi di perangkat mobile
-            ['touchstart', 'click'].forEach(function(eventType) {
-                document.getElementById('openInvitationButton').addEventListener(eventType, function() {
-                    // Tambahkan kelas animasi fly-out
-                    var myLayer = document.getElementById('myLayer');
-                    myLayer.classList.add('fly-out');
-
-                    // Pulihkan pengguliran setelah animasi selesai
-                    setTimeout(function() {
-                        myLayer.style.display = 'none';
-                        document.body.style.overflow = 'auto';
-                        startAutoScroll();
-                    }, 1000); // Ini harus sesuai dengan durasi animasi
-                });
-
-                document.getElementById('toggleAutoScrollButton').addEventListener(eventType, function() {
-                    isAutoScrollEnabled = !isAutoScrollEnabled;
-                    if (isAutoScrollEnabled) {
-                        startAutoScroll();
-                        document.getElementById('toggleAutoScrollButton').classList.add('auto-scroll-active');
-                    } else {
-                        clearInterval(scrollInterval);
-                        document.getElementById('toggleAutoScrollButton').classList.remove('auto-scroll-active');
-                    }
-                });
             });
         });
 
