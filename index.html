@@ -1089,16 +1089,19 @@
             // Mencegah pengguliran saat halaman dimuat
             document.body.style.overflow = 'hidden';
 
+            var scrollInterval;
             var isAutoScrollEnabled = false;
-            var scrollStep = 2; // Menggulir 2 piksel setiap frame
 
             // Fungsi untuk memulai auto-scroll
-            function autoScroll() {
+            function startAutoScroll() {
                 if (isAutoScrollEnabled) {
-                    window.scrollBy(0, scrollStep);
-                    if ((window.innerHeight + window.scrollY) < document.body.offsetHeight) {
-                        requestAnimationFrame(autoScroll);
-                    }
+                    scrollInterval = setInterval(function() {
+                        window.scrollBy(0, 5);
+                        // Hentikan pengguliran setelah mencapai bagian bawah halaman
+                        if ((window.innerHeight + window.scrollY) >= document.body.offsetHeight) {
+                            clearInterval(scrollInterval);
+                        }
+                    }, 10);
                 }
             }
 
@@ -1112,9 +1115,7 @@
                 setTimeout(function() {
                     myLayer.style.display = 'none';
                     document.body.style.overflow = 'auto';
-                    if (isAutoScrollEnabled) {
-                        requestAnimationFrame(autoScroll);
-                    }
+                    startAutoScroll();
                 }, 1000); // Ini harus sesuai dengan durasi animasi
             });
 
@@ -1122,9 +1123,10 @@
             document.getElementById('toggleAutoScrollButton').addEventListener('click', function() {
                 isAutoScrollEnabled = !isAutoScrollEnabled;
                 if (isAutoScrollEnabled) {
+                    startAutoScroll();
                     document.getElementById('toggleAutoScrollButton').classList.add('auto-scroll-active');
-                    requestAnimationFrame(autoScroll);
                 } else {
+                    clearInterval(scrollInterval);
                     document.getElementById('toggleAutoScrollButton').classList.remove('auto-scroll-active');
                 }
             });
@@ -1140,18 +1142,17 @@
                     setTimeout(function() {
                         myLayer.style.display = 'none';
                         document.body.style.overflow = 'auto';
-                        if (isAutoScrollEnabled) {
-                            requestAnimationFrame(autoScroll);
-                        }
+                        startAutoScroll();
                     }, 1000); // Ini harus sesuai dengan durasi animasi
                 });
 
                 document.getElementById('toggleAutoScrollButton').addEventListener(eventType, function() {
                     isAutoScrollEnabled = !isAutoScrollEnabled;
                     if (isAutoScrollEnabled) {
+                        startAutoScroll();
                         document.getElementById('toggleAutoScrollButton').classList.add('auto-scroll-active');
-                        requestAnimationFrame(autoScroll);
                     } else {
+                        clearInterval(scrollInterval);
                         document.getElementById('toggleAutoScrollButton').classList.remove('auto-scroll-active');
                     }
                 });
