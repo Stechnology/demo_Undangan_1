@@ -1095,7 +1095,7 @@
             function startAutoScroll() {
                 if (isAutoScrollEnabled) {
                     scrollInterval = setInterval(function() {
-                        window.scrollBy(0, 1);
+                        window.scrollBy(0, 5);
                         // Stop scrolling after reaching the bottom of the page
                         if ((window.innerHeight + window.scrollY) >= document.body.offsetHeight) {
                             clearInterval(scrollInterval);
