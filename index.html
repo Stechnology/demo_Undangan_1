@@ -1085,38 +1085,19 @@
                 class="fa fa-arrow-up"></i></a>
 
         <script>
-            // JavaScript untuk menyembunyikan layer dan mengizinkan scroll kembali
-            // document.addEventListener('DOMContentLoaded', function() {
-            //     // Prevent scrolling when the page loads
-            //     document.body.style.overflow = 'hidden';
-
-            //     // Function to handle button click
-            //     document.getElementById('openInvitationButton').addEventListener('click', function() {
-            //         // Add the fly-out animation class
-            //         var myLayer = document.getElementById('myLayer');
-            //         myLayer.classList.add('fly-out');
-
-            //     // Restore scrolling after the animation completes
-            //         setTimeout(function() {
-            //             myLayer.style.display = 'none';
-            //             document.body.style.overflow = 'auto';
-            //         }, 1000); // This should match the duration of the animation
-            //     });
-            // });
-            
             document.addEventListener('DOMContentLoaded', function() {
-            // Prevent scrolling when the page loads
+            // Mencegah pengguliran saat halaman dimuat
             document.body.style.overflow = 'hidden';
 
             var scrollInterval;
             var isAutoScrollEnabled = false;
 
-            // Function to start auto-scrolling
+            // Fungsi untuk memulai auto-scroll
             function startAutoScroll() {
                 if (isAutoScrollEnabled) {
                     scrollInterval = setInterval(function() {
                         window.scrollBy(0, 5);
-                        // Stop scrolling after reaching the bottom of the page
+                        // Hentikan pengguliran setelah mencapai bagian bawah halaman
                         if ((window.innerHeight + window.scrollY) >= document.body.offsetHeight) {
                             clearInterval(scrollInterval);
                         }
@@ -1124,21 +1105,21 @@
                 }
             }
 
-            // Function to handle invitation button click
+            // Fungsi untuk menangani klik tombol undangan
             document.getElementById('openInvitationButton').addEventListener('click', function() {
-                // Add the fly-out animation class
+                // Tambahkan kelas animasi fly-out
                 var myLayer = document.getElementById('myLayer');
                 myLayer.classList.add('fly-out');
 
-                // Restore scrolling after the animation completes
+                // Pulihkan pengguliran setelah animasi selesai
                 setTimeout(function() {
                     myLayer.style.display = 'none';
                     document.body.style.overflow = 'auto';
                     startAutoScroll();
-                }, 1000); // This should match the duration of the animation
+                }, 1000); // Ini harus sesuai dengan durasi animasi
             });
 
-            // Function to toggle auto-scroll
+            // Fungsi untuk toggle auto-scroll
             document.getElementById('toggleAutoScrollButton').addEventListener('click', function() {
                 isAutoScrollEnabled = !isAutoScrollEnabled;
                 if (isAutoScrollEnabled) {
@@ -1148,6 +1129,33 @@
                     clearInterval(scrollInterval);
                     document.getElementById('toggleAutoScrollButton').classList.remove('auto-scroll-active');
                 }
+            });
+
+            // Memastikan tombol berfungsi di perangkat mobile
+            ['touchstart', 'click'].forEach(function(eventType) {
+                document.getElementById('openInvitationButton').addEventListener(eventType, function() {
+                    // Tambahkan kelas animasi fly-out
+                    var myLayer = document.getElementById('myLayer');
+                    myLayer.classList.add('fly-out');
+
+                    // Pulihkan pengguliran setelah animasi selesai
+                    setTimeout(function() {
+                        myLayer.style.display = 'none';
+                        document.body.style.overflow = 'auto';
+                        startAutoScroll();
+                    }, 1000); // Ini harus sesuai dengan durasi animasi
+                });
+
+                document.getElementById('toggleAutoScrollButton').addEventListener(eventType, function() {
+                    isAutoScrollEnabled = !isAutoScrollEnabled;
+                    if (isAutoScrollEnabled) {
+                        startAutoScroll();
+                        document.getElementById('toggleAutoScrollButton').classList.add('auto-scroll-active');
+                    } else {
+                        clearInterval(scrollInterval);
+                        document.getElementById('toggleAutoScrollButton').classList.remove('auto-scroll-active');
+                    }
+                });
             });
         });
 
