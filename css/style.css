@@ -1,3 +1,88 @@
+#myLayer {
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    background-image: url(../image/bgcover.png);
+    background-size: cover;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 1000;
+}
+
+#myLayer .awal{
+    text-align: center;
+}
+
+#myLayer h4,
+#myLayer h1 {
+    color: white;
+    padding-top: 20px;
+}
+
+#myLayer button {
+    margin-top: 20px;
+}
+
+/* Responsive styles */
+@media (max-width: 1200px) {
+    #myLayer h1 {
+        font-size: 3rem;
+    }
+    #myLayer h4 {
+        font-size: 1.5rem;
+    }
+    #myLayer button {
+        padding: 10px 20px;
+        font-size: 1rem;
+    }
+    #myLayer{
+        background-size: cover;
+        background-position:center ;
+    }
+}
+
+@media (max-width: 768px) {
+    #myLayer h1 {
+        font-size: 2.5rem;
+    }
+    #myLayer h4 {
+        font-size: 1.2rem;
+    }
+    #myLayer button {
+        padding: 8px 16px;
+        font-size: 0.9rem;
+    }
+}
+
+@media (max-width: 576px) {
+    #myLayer h1 {
+        font-size: 2rem;
+    }
+    #myLayer h4 {
+        font-size: 1rem;
+    }
+    #myLayer button {
+        padding: 6px 12px;
+        font-size: 0.8rem;
+    }
+}
+
+@keyframes flyOutUp {
+    0% {
+        transform: translateY(0);
+        opacity: 1;
+    }
+    100% {
+        transform: translateY(-100%);
+        opacity: 0;
+    }
+}
+
+#myLayer.fly-out {
+    animation: flyOutUp 1s forwards; /* Adjust the duration as needed */
+}
+
 .countdown-container {
     display: grid;
     grid-template-columns: repeat(4, 1fr);
@@ -91,6 +176,25 @@
     left: 20px;
     z-index: 1000;
 }
+
+#toggleAutoScrollButton {
+    width: 50px;
+    height: 50px;
+    background-color: #f44336;
+    color: white;
+    margin-left: 10px;
+    border-radius: 50%;
+    border: none;
+}
+
+#toggleAutoScrollButton:hover {
+    background-color: #d32f2f;
+}
+
+.auto-scroll-active {
+    background-color: #4CAF50 !important;
+}
+
 /*** Spinner End ***/
 
 .back-to-top {
